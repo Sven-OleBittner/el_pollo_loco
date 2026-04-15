@@ -1,10 +1,16 @@
 class World {
   character = new Character();
   bottle = new Bottle();
-  clouds = [new Cloud1(), new Cloud2()];
+  clouds = [new Cloud1()];
   coin = new Coin();
   ctx;
   canvas;
+  background = [
+    new BackgroundLayer1(),
+    new BackgroundLayer2(),
+    new BackgroundLayer3(),
+    new BackgroundLayerAir(),
+  ];
   enemys = [
     new LittleChicken(),
     new LittleChicken(),
@@ -17,39 +23,37 @@ class World {
   constructor(canvas) {
     this.canvas = canvas;
     this.ctx = canvas.getContext("2d");
-
-    this.draw(this.character);
-    this.character.moving();
+    this.draw();
+    this.character.moveCharacter();
     // this.enemys.forEach((enemy) => {
     //   enemy.movingEnemy();
     // });
   }
 
-  draw(object) {
+  draw() {
+    this.ctx.globalCompositeOperation = "destination-over";
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-    this.ctx.drawImage(
-      object.img,
-      object.x,
-      object.y,
-      object.width,
-      object.height,
-    );
-    this.drawArryObjects();
+
+    this.addToMap(this.character);
+
+    this.enemys.forEach((item) => {
+      this.addToMap(item);
+    });
+    this.clouds.forEach((item) => {
+      this.addToMap(item);
+    });
+    this.background.forEach((item) => {
+      this.addToMap(item);
+    });
+
     let self = this;
     // Draw() wird immer wieder aufgerufen, damit die Bewegungen der Enemys sichtbar werden
     requestAnimationFrame(function () {
-      self.draw(object);
+      self.draw();
     });
   }
 
-  drawArray(array) {
-    array.forEach((item) => {
-      this.ctx.drawImage(item.img, item.x, item.y, item.width, item.height);
-    });
-  }
-
-  drawArryObjects() {
-    this.drawArray(this.enemys);
-    this.drawArray(this.clouds);
+  addToMap(mo) {
+    this.ctx.drawImage(mo.img, mo.x, mo.y, mo.width, mo.height);
   }
 }

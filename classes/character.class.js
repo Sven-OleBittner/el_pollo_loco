@@ -17,7 +17,7 @@ class Character extends MovableObject {
     super.moveLeft(this);
   }
 
-  moving() {
+  moveCharacter() {
     window.addEventListener("keydown", (event) => {
       if (event.key == "ArrowRight") {
         this.moveRight();
