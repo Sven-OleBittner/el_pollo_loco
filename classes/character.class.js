@@ -1,12 +1,14 @@
 class Character extends MovableObject {
+
+  height = 190;
+  width = 95;
+  y = 240;
+  x = 20;
+
   constructor() {
     super().loadImage(
       "./img/2_character_pepe/1_idle/idle/I-1.png"
     );
-    this.y = 240;
-    this.x = 20;
-    this.height = 190;
-    this.width = 95;
   }
 
   moveRight() {
