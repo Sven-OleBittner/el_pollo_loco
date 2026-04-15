@@ -1,10 +1,7 @@
 class World {
   character = new Character();
   bottle = new Bottle();
-  clouds = [
-    new Cloud1(),
-    new Cloud2(),
-  ];
+  clouds = [new Cloud1(), new Cloud2()];
   coin = new Coin();
   ctx;
   canvas;
@@ -21,28 +18,27 @@ class World {
     this.canvas = canvas;
     this.ctx = canvas.getContext("2d");
 
-    this.draw();
+    this.draw(this.character);
     this.character.moving();
     // this.enemys.forEach((enemy) => {
     //   enemy.movingEnemy();
     // });
   }
 
-  draw() {
+  draw(object) {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     this.ctx.drawImage(
-      this.character.img,
-      this.character.x,
-      this.character.y,
-      this.character.width,
-      this.character.height,
+      object.img,
+      object.x,
+      object.y,
+      object.width,
+      object.height,
     );
-    this.drawArray(this.enemys);
-    this.drawArray(this.clouds);
+    this.drawArryObjects();
     let self = this;
     // Draw() wird immer wieder aufgerufen, damit die Bewegungen der Enemys sichtbar werden
     requestAnimationFrame(function () {
-      self.draw();
+      self.draw(object);
     });
   }
 
@@ -50,5 +46,10 @@ class World {
     array.forEach((item) => {
       this.ctx.drawImage(item.img, item.x, item.y, item.width, item.height);
     });
+  }
+
+  drawArryObjects() {
+    this.drawArray(this.enemys);
+    this.drawArray(this.clouds);
   }
 }
