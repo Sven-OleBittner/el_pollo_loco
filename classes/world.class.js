@@ -5,11 +5,11 @@ class World {
   coin = new Coin();
   ctx;
   canvas;
-  background = [
-    new BackgroundLayer1(),
-    new BackgroundLayer2(),
-    new BackgroundLayer3(),
-    new BackgroundLayerAir(),
+  backgroundObjects = [
+    new BackgroundObject('img/5_background/layers/1_first_layer/1.png'),
+    new BackgroundObject('img/5_background/layers/2_second_layer/1.png'),
+    new BackgroundObject('img/5_background/layers/3_third_layer/1.png'),
+    new BackgroundObject('img/5_background/layers/air.png'),
   ];
   enemys = [
     new LittleChicken(),
@@ -42,7 +42,7 @@ class World {
     this.clouds.forEach((item) => {
       this.addToMap(item);
     });
-    this.background.forEach((item) => {
+    this.backgroundObjects.forEach((item) => {
       this.addToMap(item);
     });
 
