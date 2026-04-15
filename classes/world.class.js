@@ -6,10 +6,10 @@ class World {
   ctx;
   canvas;
   backgroundObjects = [
-    new BackgroundObject('img/5_background/layers/1_first_layer/1.png'),
-    new BackgroundObject('img/5_background/layers/2_second_layer/1.png'),
-    new BackgroundObject('img/5_background/layers/3_third_layer/1.png'),
-    new BackgroundObject('img/5_background/layers/air.png'),
+    new BackgroundObject("img/5_background/layers/1_first_layer/1.png"),
+    new BackgroundObject("img/5_background/layers/2_second_layer/1.png"),
+    new BackgroundObject("img/5_background/layers/3_third_layer/1.png"),
+    new BackgroundObject("img/5_background/layers/air.png"),
   ];
   enemys = [
     new LittleChicken(),
@@ -36,15 +36,9 @@ class World {
 
     this.addToMap(this.character);
 
-    this.enemys.forEach((item) => {
-      this.addToMap(item);
-    });
-    this.clouds.forEach((item) => {
-      this.addToMap(item);
-    });
-    this.backgroundObjects.forEach((item) => {
-      this.addToMap(item);
-    });
+    this.addObjectsToMap(this.enemys);
+    this.addObjectsToMap(this.clouds);
+    this.addObjectsToMap(this.backgroundObjects);
 
     let self = this;
     // Draw() wird immer wieder aufgerufen, damit die Bewegungen der Enemys sichtbar werden
@@ -55,5 +49,11 @@ class World {
 
   addToMap(mo) {
     this.ctx.drawImage(mo.img, mo.x, mo.y, mo.width, mo.height);
+  }
+
+  addObjectsToMap(ObjectsArray) {
+    ObjectsArray.forEach((item) => {
+      this.addToMap(item);
+    });
   }
 }
