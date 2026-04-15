@@ -11,21 +11,13 @@ class Character extends MovableObject {
     );
   }
 
-  moveRight() {
-    super.moveRight(this);
-  }
-
-  moveLeft() {
-    super.moveLeft(this);
-  }
-
   moveCharacter() {
     window.addEventListener("keydown", (event) => {
       if (event.key == "ArrowRight") {
-        this.moveRight();
+        super.moveRight(this);
       }
       if (event.key == "ArrowLeft") {
-        this.moveLeft();
+        super.moveLeft(this);
       }
     });
   }
