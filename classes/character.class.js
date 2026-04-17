@@ -69,6 +69,9 @@ class Character extends MovableObject {
 
   constructor() {
     super().loadImage("./img/2_character_pepe/1_idle/idle/I-1.png");
+    this.loadImages(this.IMAGES_WALKING);
+    this.animate(this.IMAGES_WALKING);
+
     this.moveCharacter();
   }
 
@@ -82,18 +85,14 @@ class Character extends MovableObject {
   }
 
   moveCharacter() {
-    window.addEventListener("keyup", (event) => {
+    window.addEventListener("keydown", (event) => {
       if (event.key == "ArrowRight") {
         super.moveRight(this);
       }
-      this.loadImages(this.IMAGES_WALKING);
-      this.animate(this.IMAGES_WALKING);
 
-      // if (event.key == "ArrowLeft") {
-      //   this.loadImages(this.IMAGES_WALKING);
-      //   this.animate(this.IMAGES_WALKING);
-      //   super.moveLeft(this);
-      // }
+      if (event.key == "ArrowLeft") {
+        this.loadImages(this.IMAGES_WALKING);
+      }
     });
   }
 
