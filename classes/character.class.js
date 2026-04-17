@@ -3,6 +3,10 @@ class Character extends MovableObject {
   width = 95;
   y = 240;
   x = 20;
+  world;
+  keyboard;
+  speed = 1.95;
+
   IMAGES_IDLE = [
     "./img/2_character_pepe/1_idle/idle/I-1.png",
     "./img/2_character_pepe/1_idle/idle/I-2.png",
@@ -69,31 +73,37 @@ class Character extends MovableObject {
 
   constructor() {
     super().loadImage("./img/2_character_pepe/1_idle/idle/I-1.png");
+    this.keyboard = new Keyboard();
     this.loadImages(this.IMAGES_WALKING);
     this.animate(this.IMAGES_WALKING);
-
-    this.moveCharacter();
   }
 
   animate(imgArray) {
     setInterval(() => {
-      let i = this.currentImage % imgArray.length;
-      let path = imgArray[i];
-      this.img = this.imgCache[path];
-      this.currentImage++;
-    }, 100);
-  }
-
-  moveCharacter() {
-    window.addEventListener("keydown", (event) => {
-      if (event.key == "ArrowRight") {
-        super.moveRight(this);
+      if (this.world.keyboard.RIGHT) {
+        this.x += this.speed;
+        this.otherDirection = false;
       }
-
-      if (event.key == "ArrowLeft") {
-        this.loadImages(this.IMAGES_WALKING);
+      if (this.world.keyboard.LEFT) {
+        this.x -= this.speed;
+        this.otherDirection = true;
       }
-    });
+    }, 1000 / 60);
+
+    setInterval(() => {
+      if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
+        let i = this.currentImage % imgArray.length;
+        let path = imgArray[i];
+        this.img = this.imgCache[path];
+        this.currentImage++;
+        if (this.world.keyboard.RIGHT) {
+          this.x += this.speed;
+        }
+        if (this.world.keyboard.LEFT) {
+          this.x -= this.speed;
+        }
+      }
+    }, 75);
   }
 
   jump() {}

@@ -7,6 +7,8 @@ class MovableObject {
   imgCache = {};
   currentImage = 0;
   speed = 0.15;
+  keyboard;
+  otherDirection = false;
 
   loadImage(path) {
     this.img = new Image();
@@ -21,9 +23,10 @@ class MovableObject {
     });
   }
 
-  moveRight(figure) {
-    console.log(`Move right`);
-    figure.x += 2;
+  moveRight() {
+    setInterval(() => {
+      this.x += this.speed;
+    }, 1000 / 60);
   }
 
   moveLeft() {
