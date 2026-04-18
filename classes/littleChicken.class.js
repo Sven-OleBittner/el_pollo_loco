@@ -21,10 +21,7 @@ class LittleChicken extends MovableObject {
     this.moveLeft();
 
     setInterval(() => {
-      let i = this.currentImage % imgArray.length;
-      let path = imgArray[i];
-      this.img = this.imgCache[path];
-      this.currentImage++;
+      this.playAnimation(this.IMAGES_WALKING);
     }, 200);
   }
 }

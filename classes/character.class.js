@@ -5,7 +5,7 @@ class Character extends MovableObject {
   x = 20;
   world;
   keyboard;
-  speed = 10;
+  speed = 2.5;
 
   IMAGES_IDLE = [
     "./img/2_character_pepe/1_idle/idle/I-1.png",
@@ -80,11 +80,11 @@ class Character extends MovableObject {
 
   animate(imgArray) {
     setInterval(() => {
-      if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
+      if (this.world.keyboard.RIGHT && this.x <= this.world.level.level_end_x) {
         this.x += this.speed;
         this.otherDirection = false;
       }
-      if (this.world.keyboard.LEFT && this.x > -500) {
+      if (this.world.keyboard.LEFT && this.x >= 0) {
         this.x -= this.speed;
         this.otherDirection = true;
       }
@@ -93,14 +93,11 @@ class Character extends MovableObject {
 
     setInterval(() => {
       if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
-        let i = this.currentImage % imgArray.length;
-        let path = imgArray[i];
-        this.img = this.imgCache[path];
-        this.currentImage++;
-        if (this.world.keyboard.RIGHT) {
+        this.playAnimation(imgArray);
+        if (this.world.keyboard.RIGHT && this.x <= this.world.level.level_end_x) {
           this.x += this.speed;
         }
-        if (this.world.keyboard.LEFT) {
+        if (this.world.keyboard.LEFT && this.x >= 0) {
           this.x -= this.speed;
         }
       }
