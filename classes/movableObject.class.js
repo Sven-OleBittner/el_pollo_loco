@@ -41,4 +41,12 @@ class MovableObject {
     this.img = this.imgCache[path];
     this.currentImage++;
   }
+
+  stopInterval(interval) {
+    clearInterval(interval);
+  }
+
+  stopTimeout(timeout) {
+    clearTimeout(timeout);
+  }
 }

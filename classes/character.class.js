@@ -77,9 +77,15 @@ class Character extends MovableObject {
     this.loadImages(this.IMAGES_WALKING);
     this.loadImages(this.IMAGES_IDLE);
     this.loadImages(this.IMAGES_IDLE_LONG);
-
-    this.animate(this.IMAGES_WALKING);
+    this.loadImages(this.IMAGES_JUMPING);
+    this.loadImages(this.IMAGES_HURT);
+    this.loadImages(this.IMAGES_DEAD);
+    this.animate();
     this.idleAnimation();
+    this.idleLongAnimation();
+    this.jumpingAnimation();
+    this.hurtAnimation();
+    this.deadAnimation();
   }
 
   animate(imgArray) {
@@ -98,7 +104,10 @@ class Character extends MovableObject {
     setInterval(() => {
       if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
         this.playAnimation(imgArray);
-        if (this.world.keyboard.RIGHT && this.x <= this.world.level.level_end_x) {
+        if (
+          this.world.keyboard.RIGHT &&
+          this.x <= this.world.level.level_end_x
+        ) {
           this.x += this.speed;
         }
         if (this.world.keyboard.LEFT && this.x >= 0) {
@@ -110,20 +119,43 @@ class Character extends MovableObject {
 
   idleAnimation() {
     setInterval(() => {
-      setTimeout(() => {
-              if (!this.world.keyboard.RIGHT && !this.world.keyboard.LEFT) {
+      if (!this.world.keyboard.RIGHT && !this.world.keyboard.LEFT) {
         this.playAnimation(this.IMAGES_IDLE);
       }
-      }, 2000);
     }, 175);
   }
 
   idleLongAnimation() {
-      setTimeout(() => {
-              if (!this.world.keyboard.RIGHT && !this.world.keyboard.LEFT) {
+    setInterval(() => {
+      if (!this.world.keyboard.RIGHT && !this.world.keyboard.LEFT) {
         this.playAnimation(this.IMAGES_IDLE_LONG);
       }
-      }, 5000);}
+    }, 175);
+  }
+
+  jumpingAnimation() {
+    setInterval(() => {
+      if (this.world.keyboard.SPACE) {
+        this.playAnimation(this.IMAGES_JUMPING);
+      }
+    }, 175);
+  }
+
+  hurtAnimation() {
+    setInterval(() => {
+      if (this.world.keyboard.DOWN) {
+        this.playAnimation(this.IMAGES_HURT);
+      }
+    }, 175);
+  }
+
+  deadAnimation() {
+    setInterval(() => {
+      if (this.world.keyboard.DOWN) {
+        this.playAnimation(this.IMAGES_DEAD);
+      }
+    }, 175);
+  }
 
   jump() {}
 }
