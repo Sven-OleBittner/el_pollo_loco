@@ -1,11 +1,11 @@
 class Character extends MovableObject {
-  height = 190;
-  width = 95;
-  y = 240;
+  height = 250;
+  width = 130;
+  y = 180;
   x = 20;
   world;
   keyboard;
-  speed = 1.95;
+  speed = 3;
 
   IMAGES_IDLE = [
     "./img/2_character_pepe/1_idle/idle/I-1.png",

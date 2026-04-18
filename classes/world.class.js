@@ -1,46 +1,14 @@
 class World {
   character = new Character();
+  backgroundObjects = level1.backgroundObjects;
+  enemys = level1.enemies;
+  clouds = level1.clouds;
   bottle = new Bottle();
-  clouds = [new Cloud1(), new Cloud2(720)];
   coin = new Coin();
   ctx;
   canvas;
   keyboard;
   camera_x = 0;
-
-  backgroundObjects = [
-    new BackgroundObject("img/5_background/layers/air.png", -719),
-    new BackgroundObject("img/5_background/layers/3_third_layer/2.png", -719),
-    new BackgroundObject("img/5_background/layers/2_second_layer/2.png", -719),
-    new BackgroundObject("img/5_background/layers/1_first_layer/2.png", -719),
-    new BackgroundObject("img/5_background/layers/air.png", 0),
-    new BackgroundObject("img/5_background/layers/3_third_layer/1.png", 0),
-    new BackgroundObject("img/5_background/layers/2_second_layer/1.png", 0),
-    new BackgroundObject("img/5_background/layers/1_first_layer/1.png", 0),
-    new BackgroundObject("img/5_background/layers/air.png", 719),
-    new BackgroundObject("img/5_background/layers/3_third_layer/2.png", 719),
-    new BackgroundObject("img/5_background/layers/2_second_layer/2.png", 719),
-    new BackgroundObject("img/5_background/layers/1_first_layer/2.png", 719),
-    new BackgroundObject("img/5_background/layers/air.png", 719 * 2),
-    new BackgroundObject("img/5_background/layers/3_third_layer/1.png", 719 * 2),
-    new BackgroundObject("img/5_background/layers/2_second_layer/1.png", 719 * 2),
-    new BackgroundObject("img/5_background/layers/1_first_layer/1.png", 719 * 2),
-    new BackgroundObject("img/5_background/layers/air.png", 719 * 3),
-    new BackgroundObject("img/5_background/layers/3_third_layer/2.png", 719 * 3),
-    new BackgroundObject("img/5_background/layers/2_second_layer/2.png", 719 * 3),
-    new BackgroundObject("img/5_background/layers/1_first_layer/2.png", 719 * 3),
-
-
-
-  ];
-  enemys = [
-    new LittleChicken(),
-    new LittleChicken(),
-    new LittleChicken(),
-    new BigChicken(),
-    new BigChicken(),
-    new BigChicken(),
-  ];
 
   constructor(canvas, keyboard) {
     this.ctx = canvas.getContext("2d");
@@ -58,7 +26,7 @@ class World {
     this.addObjectsToMap(this.enemys);
 
     this.addToMap(this.character);
-    this.ctx.translate(- this.camera_x, 0);
+    this.ctx.translate(-this.camera_x, 0);
 
     let self = this;
     // Draw() wird immer wieder aufgerufen, damit die Bewegungen der Enemys sichtbar werden
@@ -80,7 +48,6 @@ class World {
       mo.x = mo.x * -1;
       this.ctx.restore();
     }
-    
   }
 
   addObjectsToMap(ObjectsArray) {
