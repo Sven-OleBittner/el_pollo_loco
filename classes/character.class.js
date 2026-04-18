@@ -75,7 +75,11 @@ class Character extends MovableObject {
     super().loadImage("./img/2_character_pepe/1_idle/idle/I-1.png");
     this.keyboard = new Keyboard();
     this.loadImages(this.IMAGES_WALKING);
+    this.loadImages(this.IMAGES_IDLE);
+    this.loadImages(this.IMAGES_IDLE_LONG);
+
     this.animate(this.IMAGES_WALKING);
+    this.idleAnimation();
   }
 
   animate(imgArray) {
@@ -103,6 +107,23 @@ class Character extends MovableObject {
       }
     }, 75);
   }
+
+  idleAnimation() {
+    setInterval(() => {
+      setTimeout(() => {
+              if (!this.world.keyboard.RIGHT && !this.world.keyboard.LEFT) {
+        this.playAnimation(this.IMAGES_IDLE);
+      }
+      }, 2000);
+    }, 175);
+  }
+
+  idleLongAnimation() {
+      setTimeout(() => {
+              if (!this.world.keyboard.RIGHT && !this.world.keyboard.LEFT) {
+        this.playAnimation(this.IMAGES_IDLE_LONG);
+      }
+      }, 5000);}
 
   jump() {}
 }
