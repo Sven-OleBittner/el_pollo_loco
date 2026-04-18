@@ -1,9 +1,9 @@
 class Endboss extends MovableObject {
-  height = 400;
+  height = 500;
   width = 250;
-  y = 50;
+  y = -50;
   world;
-  speed = 2;
+  speed = Math.random() * 2 + 3;
 
   IMAGES_ALERT = [
     "./img/4_enemie_boss_chicken/2_alert/G5.png",
