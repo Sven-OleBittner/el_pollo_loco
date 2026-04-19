@@ -134,17 +134,13 @@ class Character extends MovableObject {
 
   hurtAnimation() {
     setInterval(() => {
-      if (this.world.keyboard.DOWN) {
-        this.playAnimation(this.IMAGES_HURT);
-      }
-    }, 1000 / 10);
+      this.playAnimation(this.IMAGES_HURT);
+    }, 1000 / 5);
   }
 
   deadAnimation() {
     setInterval(() => {
-      if (this.world.keyboard.DOWN) {
         this.playAnimation(this.IMAGES_DEAD);
-      }
     }, 1000 / 10);
   }
 }
