@@ -12,7 +12,6 @@ function init() {
 }
 
 window.addEventListener("keydown", (event) => {
-  console.log(event);
   switch (event.keyCode) {
     case 39:
       keyboard.RIGHT = true;

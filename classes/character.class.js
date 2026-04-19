@@ -81,37 +81,34 @@ class Character extends MovableObject {
     this.loadImages(this.IMAGES_HURT);
     this.loadImages(this.IMAGES_DEAD);
     this.animate();
-    this.idleAnimation();
-    this.idleLongAnimation();
-    this.jumpingAnimation();
-    this.hurtAnimation();
-    this.deadAnimation();
+    this.applyGravity();
+    //this.idleAnimation();
+    //this.idleLongAnimation();
+    //this.jumpingAnimation();
+    //this.hurtAnimation();
+    //this.deadAnimation();
   }
 
-  animate(imgArray) {
+  animate() {
     setInterval(() => {
+      if (this.world.keyboard.UP && !this.isAboveGround()) {
+        this.jump();
+      }
       if (this.world.keyboard.RIGHT && this.x <= this.world.level.level_end_x) {
-        this.x += this.speed;
-        this.otherDirection = false;
+        this.moveRight();
       }
       if (this.world.keyboard.LEFT && this.x >= 0) {
-        this.x -= this.speed;
-        this.otherDirection = true;
+        this.moveLeft();
       }
       this.world.camera_x = -this.x + 100;
     }, 1000 / 120);
 
     setInterval(() => {
-      if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
-        this.playAnimation(imgArray);
-        if (
-          this.world.keyboard.RIGHT &&
-          this.x <= this.world.level.level_end_x
-        ) {
-          this.x += this.speed;
-        }
-        if (this.world.keyboard.LEFT && this.x >= 0) {
-          this.x -= this.speed;
+      if (this.isAboveGround()) {
+        this.playAnimation(this.IMAGES_JUMPING);
+      } else {
+        if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
+          this.playAnimation(this.IMAGES_WALKING);
         }
       }
     }, 75);
@@ -133,14 +130,6 @@ class Character extends MovableObject {
     }, 175);
   }
 
-  jumpingAnimation() {
-    setInterval(() => {
-      if (this.world.keyboard.SPACE) {
-        this.playAnimation(this.IMAGES_JUMPING);
-      }
-    }, 175);
-  }
-
   hurtAnimation() {
     setInterval(() => {
       if (this.world.keyboard.DOWN) {
@@ -156,6 +145,4 @@ class Character extends MovableObject {
       }
     }, 175);
   }
-
-  jump() {}
 }
