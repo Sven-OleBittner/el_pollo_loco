@@ -91,14 +91,16 @@ class Character extends MovableObject {
 
   animate() {
     setInterval(() => {
-      if (this.world.keyboard.UP && !this.isAboveGround()) {
+      if (this.world.keyboard.SPACE && !this.isAboveGround()) {
         this.jump();
       }
       if (this.world.keyboard.RIGHT && this.x <= this.world.level.level_end_x) {
         this.moveRight();
+        this.otherDirection = false;
       }
       if (this.world.keyboard.LEFT && this.x >= 0) {
         this.moveLeft();
+        this.otherDirection = true;
       }
       this.world.camera_x = -this.x + 100;
     }, 1000 / 120);
@@ -111,7 +113,7 @@ class Character extends MovableObject {
           this.playAnimation(this.IMAGES_WALKING);
         }
       }
-    }, 75);
+    }, 1000 / 10);
   }
 
   idleAnimation() {
@@ -119,7 +121,7 @@ class Character extends MovableObject {
       if (!this.world.keyboard.RIGHT && !this.world.keyboard.LEFT) {
         this.playAnimation(this.IMAGES_IDLE);
       }
-    }, 175);
+    }, 1000 / 10);
   }
 
   idleLongAnimation() {
@@ -127,7 +129,7 @@ class Character extends MovableObject {
       if (!this.world.keyboard.RIGHT && !this.world.keyboard.LEFT) {
         this.playAnimation(this.IMAGES_IDLE_LONG);
       }
-    }, 175);
+    }, 1000 / 10);
   }
 
   hurtAnimation() {
@@ -135,7 +137,7 @@ class Character extends MovableObject {
       if (this.world.keyboard.DOWN) {
         this.playAnimation(this.IMAGES_HURT);
       }
-    }, 175);
+    }, 1000 / 10);
   }
 
   deadAnimation() {
@@ -143,6 +145,6 @@ class Character extends MovableObject {
       if (this.world.keyboard.DOWN) {
         this.playAnimation(this.IMAGES_DEAD);
       }
-    }, 175);
+    }, 1000 / 10);
   }
 }
