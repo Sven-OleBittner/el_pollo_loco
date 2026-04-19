@@ -73,9 +73,6 @@ class World {
       this.level.enemies.forEach((enemy) => {
         if (this.character.isColliding(enemy)) {
           this.character.hurtAnimation();
-          clearInterval(this.character.hurtAnimation);
-
-          console.log("hit");
         }
       });
     }, 200);
