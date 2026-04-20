@@ -69,12 +69,24 @@ class World {
   }
 
   checkCollisions() {
-    setInterval(() => {
+    const hurtAnimationInterval = setInterval(() => {
       this.level.enemies.forEach((enemy) => {
         if (this.character.isColliding(enemy)) {
           this.character.hurtAnimation();
+          this.character.health -= 5;
+          console.log("hit :" + this.character.health);
+        }  
+        if (this.isDead(this.character)) {
+          this.character.deadAnimation();
+          this.character.health = 0;
+          console.log("game over");
+          clearInterval(hurtAnimationInterval);
         }
       });
     }, 200);
+  }
+
+  isDead(mo) {
+    return mo.health <= 0;
   }
 }

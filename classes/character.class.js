@@ -5,7 +5,7 @@ class Character extends MovableObject {
   x = 20;
   world;
   keyboard;
-  speed = 2.5;
+  speed = 3;
 
   IMAGES_IDLE = [
     "./img/2_character_pepe/1_idle/idle/I-1.png",
@@ -74,6 +74,7 @@ class Character extends MovableObject {
   constructor() {
     super().loadImage("./img/2_character_pepe/1_idle/idle/I-1.png");
     this.keyboard = new Keyboard();
+    this.health = 100;
     this.loadImages(this.IMAGES_WALKING);
     this.loadImages(this.IMAGES_IDLE);
     this.loadImages(this.IMAGES_IDLE_LONG);
@@ -103,7 +104,7 @@ class Character extends MovableObject {
         this.otherDirection = true;
       }
       this.world.camera_x = -this.x + 100;
-    }, 1000 / 120);
+    }, 1000 / 60);
 
     setInterval(() => {
       if (this.isAboveGround()) {
@@ -133,14 +134,11 @@ class Character extends MovableObject {
   }
 
   hurtAnimation() {
-    setInterval(() => {
       this.playAnimation(this.IMAGES_HURT);
-    }, 1000 / 5);
-  }
+    };
+  
 
   deadAnimation() {
-    setInterval(() => {
         this.playAnimation(this.IMAGES_DEAD);
-    }, 1000 / 10);
-  }
+      };
 }
