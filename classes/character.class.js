@@ -71,6 +71,15 @@ class Character extends MovableObject {
     "./img/2_character_pepe/5_dead/D-57.png",
   ];
 
+  STAUSBAR_HEALTH = [
+    "./img/7_statusbars/1_statusbar/2_statusbar_health/green/0.png",
+    "./img/7_statusbars/1_statusbar/2_statusbar_health/green/20.png",
+    "./img/7_statusbars/1_statusbar/2_statusbar_health/green/40.png",
+    "./img/7_statusbars/1_statusbar/2_statusbar_health/green/60.png",
+    "./img/7_statusbars/1_statusbar/2_statusbar_health/green/80.png",
+    "./img/7_statusbars/1_statusbar/2_statusbar_health/green/100.png"
+  ];
+
   constructor() {
     super().loadImage("./img/2_character_pepe/1_idle/idle/I-1.png");
     this.keyboard = new Keyboard();
@@ -81,6 +90,7 @@ class Character extends MovableObject {
     this.loadImages(this.IMAGES_JUMPING);
     this.loadImages(this.IMAGES_HURT);
     this.loadImages(this.IMAGES_DEAD);
+    this.loadImages(this.STAUSBAR_HEALTH);
     this.animate();
     this.applyGravity();
     //this.idleAnimation();
@@ -107,38 +117,33 @@ class Character extends MovableObject {
     }, 1000 / 60);
 
     setInterval(() => {
-      if (this.isAboveGround()) {
+      if (this.isDead()) {
+        this.playAnimation(this.IMAGES_DEAD);
+      } else if (this.isHurt()) {
+        this.playAnimation(this.IMAGES_HURT);
+      } else if (this.isAboveGround()) {
         this.playAnimation(this.IMAGES_JUMPING);
+      } else if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
+        this.playAnimation(this.IMAGES_WALKING);
       } else {
-        if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
-          this.playAnimation(this.IMAGES_WALKING);
-        }
-      }
-    }, 1000 / 10);
-  }
-
-  idleAnimation() {
-    setInterval(() => {
-      if (!this.world.keyboard.RIGHT && !this.world.keyboard.LEFT) {
         this.playAnimation(this.IMAGES_IDLE);
       }
     }, 1000 / 10);
   }
 
+  idleAnimation() {
+    this.playAnimation(this.IMAGES_IDLE);
+  }
+
   idleLongAnimation() {
-    setInterval(() => {
-      if (!this.world.keyboard.RIGHT && !this.world.keyboard.LEFT) {
-        this.playAnimation(this.IMAGES_IDLE_LONG);
-      }
-    }, 1000 / 10);
+    this.playAnimation(this.IMAGES_IDLE_LONG);
   }
 
   hurtAnimation() {
-      this.playAnimation(this.IMAGES_HURT);
-    };
-  
+    this.playAnimation(this.IMAGES_HURT);
+  }
 
   deadAnimation() {
-        this.playAnimation(this.IMAGES_DEAD);
-      };
+    this.playAnimation(this.IMAGES_DEAD);
+  }
 }

@@ -12,6 +12,7 @@ class MovableObject {
   speedY = 0;
   acceleration = 2.5;
   health;
+  lastHit = 0;
 
 
   applyGravity() {
@@ -89,6 +90,25 @@ class MovableObject {
       this.x < mo.x &&
       this.y < mo.y + mo.height
     );
+  }
+
+  isHit(damage) {
+    this.health -= damage;
+    if (this.health <= 0) {
+      this.health = 0;
+    } else{
+      this.lastHit = new Date().getTime();
+    }
+  }
+
+  isHurt() {
+    let timepassed = new Date().getTime() - this.lastHit;
+    timepassed = timepassed / 1000;    
+    return timepassed < 1;
+  }
+
+  isDead() {
+    return this.health <= 0;
   }
 
 }

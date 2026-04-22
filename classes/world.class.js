@@ -25,6 +25,7 @@ class World {
     this.addObjectsToMap(this.level.enemies);
 
     this.addToMap(this.character);
+    this.drawStatusBar(this.character.health, 20, 20);
     this.ctx.translate(-this.camera_x, 0);
 
     let self = this;
@@ -44,6 +45,12 @@ class World {
       this.flipImageBack(mo);
     }
     mo.drawFrame(this.ctx);
+  }
+
+  drawStatusBar(statusbar, x, y) {
+    let path = this.character.STAUSBAR_HEALTH[this.character.health / 20];
+    let img = this.character.imgCache[path];
+    this.ctx.drawImage(img, x, y, 200, 50);
   }
 
   flipImage(mo) {
@@ -72,21 +79,14 @@ class World {
     const hurtAnimationInterval = setInterval(() => {
       this.level.enemies.forEach((enemy) => {
         if (this.character.isColliding(enemy)) {
-          this.character.hurtAnimation();
-          this.character.health -= 5;
+          this.character.isHit(5);
           console.log("hit :" + this.character.health);
         }  
-        if (this.isDead(this.character)) {
-          this.character.deadAnimation();
-          this.character.health = 0;
-          console.log("game over");
-          clearInterval(hurtAnimationInterval);
-        }
       });
     }, 200);
   }
 
   isDead(mo) {
-    return mo.health <= 0;
+    return mo.health == 0;
   }
 }
