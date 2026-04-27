@@ -6,10 +6,8 @@ class DrawableObject {
   width;
   imgCache = {};
   currentImage = 0;
-  speed = 0.15;
-  keyboard;
-  otherDirection = false;
   world;
+  ctx;
 
   loadImage(path) {
     this.img = new Image();
@@ -24,16 +22,7 @@ class DrawableObject {
     });
   }
 
-    playAnimation(arr) {
-    let i = this.currentImage % arr.length;
-    let path = arr[i];
-    this.img = this.imgCache[path];
-    this.currentImage++;
-  }
-
-    draw(ctx) {
+  draw(ctx) {
     ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
   }
-
-
 }

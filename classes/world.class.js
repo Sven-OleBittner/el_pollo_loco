@@ -7,7 +7,7 @@ class World {
   canvas;
   keyboard;
   camera_x = 0;
-  statusbar = new StatusBar(this, this.ctx);
+  statusBar = new StatusBar(this);
 
   constructor(canvas, keyboard) {
     this.ctx = canvas.getContext("2d");
@@ -25,7 +25,10 @@ class World {
     this.addObjectsToMap(this.level.clouds);
     this.addObjectsToMap(this.level.enemies);
 
+
     this.addToMap(this.character);
+    debugger;
+    this.addToMap(this.statusBar);
     this.ctx.translate(-this.camera_x, 0);
 
     let self = this;

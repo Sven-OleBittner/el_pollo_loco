@@ -1,9 +1,18 @@
 class MovableObject extends DrawableObject {
+  speed = 0.15;
+  keyboard;
+  otherDirection = false;
   speedY = 0;
   acceleration = 2.5;
   health;
   lastHit = 0;
 
+  playAnimation(arr) {
+    let i = this.currentImage % arr.length;
+    let path = arr[i];
+    this.img = this.imgCache[path];
+    this.currentImage++;
+  }
 
   applyGravity() {
     setInterval(() => {
@@ -21,7 +30,6 @@ class MovableObject extends DrawableObject {
   isOnGround() {
     return this.y === 180;
   }
-
 
   moveRight() {
     this.x += this.speed;
@@ -63,19 +71,18 @@ class MovableObject extends DrawableObject {
     this.health -= damage;
     if (this.health <= 0) {
       this.health = 0;
-    } else{
+    } else {
       this.lastHit = new Date().getTime();
     }
   }
 
   isHurt() {
     let timepassed = new Date().getTime() - this.lastHit;
-    timepassed = timepassed / 1000;    
+    timepassed = timepassed / 1000;
     return timepassed < 1;
   }
 
   isDead() {
     return this.health <= 0;
   }
-
 }
