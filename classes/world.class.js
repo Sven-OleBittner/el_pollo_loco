@@ -7,6 +7,7 @@ class World {
   canvas;
   keyboard;
   camera_x = 0;
+  statusbar = new StatusBar(this, this.ctx);
 
   constructor(canvas, keyboard) {
     this.ctx = canvas.getContext("2d");
@@ -25,7 +26,6 @@ class World {
     this.addObjectsToMap(this.level.enemies);
 
     this.addToMap(this.character);
-    this.drawStatusBar(this.character.health, -60, 5);
     this.ctx.translate(-this.camera_x, 0);
 
     let self = this;
@@ -45,12 +45,6 @@ class World {
       this.flipImageBack(mo);
     }
     mo.drawFrame(this.ctx);
-  }
-
-  drawStatusBar(statusbar, x, y) {
-    let path = this.character.STAUSBAR_HEALTH[this.character.health / 20];
-    let img = this.character.imgCache[path];
-    this.ctx.drawImage(img, x, y, 200, 50);
   }
 
   flipImage(mo) {
@@ -81,7 +75,7 @@ class World {
         if (this.character.isColliding(enemy)) {
           this.character.isHit(20);
           console.log("hit :" + this.character.health);
-        }  
+        }
       });
     }, 200);
   }

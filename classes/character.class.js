@@ -6,6 +6,8 @@ class Character extends MovableObject {
   world;
   keyboard;
   speed = 3;
+  coins = 0;
+  bottles = 0
 
   IMAGES_IDLE = [
     "./img/2_character_pepe/1_idle/idle/I-1.png",
@@ -80,6 +82,24 @@ class Character extends MovableObject {
     "./img/7_statusbars/1_statusbar/2_statusbar_health/green/100.png"
   ];
 
+  STAUSBAR_COIN = [
+    "./img/7_statusbars/1_statusbar/1_statusbar_coin/green/0.png",
+    "./img/7_statusbars/1_statusbar/1_statusbar_coin/green/20.png",
+    "./img/7_statusbars/1_statusbar/1_statusbar_coin/green/40.png",
+    "./img/7_statusbars/1_statusbar/1_statusbar_coin/green/60.png",
+    "./img/7_statusbars/1_statusbar/1_statusbar_coin/green/80.png",
+    "./img/7_statusbars/1_statusbar/1_statusbar_coin/green/100.png"
+  ];
+
+  STAUSBAR_BOTTLE = [
+    "./img/7_statusbars/1_statusbar/3_statusbar_bottle/green/0.png",
+    "./img/7_statusbars/1_statusbar/3_statusbar_bottle/green/20.png",
+    "./img/7_statusbars/1_statusbar/3_statusbar_bottle/green/40.png",
+    "./img/7_statusbars/1_statusbar/3_statusbar_bottle/green/60.png",
+    "./img/7_statusbars/1_statusbar/3_statusbar_bottle/green/80.png",
+    "./img/7_statusbars/1_statusbar/3_statusbar_bottle/green/100.png"
+  ];
+
   constructor() {
     super().loadImage("./img/2_character_pepe/1_idle/idle/I-1.png");
     this.keyboard = new Keyboard();
@@ -91,8 +111,11 @@ class Character extends MovableObject {
     this.loadImages(this.IMAGES_HURT);
     this.loadImages(this.IMAGES_DEAD);
     this.loadImages(this.STAUSBAR_HEALTH);
+    this.loadImages(this.STAUSBAR_COIN);
+    this.loadImages(this.STAUSBAR_BOTTLE);
     this.animate();
     this.applyGravity();
+    
     //this.idleAnimation();
     //this.idleLongAnimation();
     //this.jumpingAnimation();
