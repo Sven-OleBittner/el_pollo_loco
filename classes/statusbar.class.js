@@ -44,13 +44,8 @@ class StatusBar extends DrawableObject {
     super();
     this.world = world;
     this.character = this.world.character;
-    this.x = -60 + this.character.x;
-    this.loadImages(this.STAUSBAR_COIN);
-    this.loadImages(this.STAUSBAR_BOTTLE);
+    this.x = 20;
     this.loadImages(this.BOSSBAR_HEALTH);
-
-    // this.drawStatusBar("bottlebar", -60, 40);
-    // this.drawStatusBar("coinbar", -60, 95);
   }
 
   drawStatusBar(statusbar) {
