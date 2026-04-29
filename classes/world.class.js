@@ -28,7 +28,7 @@ class World {
     this.addObjectsToMap(this.level.enemies);
 
     this.ctx.translate(-this.camera_x, 0);
-
+    // space for static objects like statusbars
     this.addToMap(this.healthBarPepe);
     this.addToMap(this.bottleBarPepe);
     this.addToMap(this.coinBarPepe);
