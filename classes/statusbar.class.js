@@ -1,8 +1,8 @@
 class StatusBar extends DrawableObject {
   x;
   y;
-  width = 200;
-  height = 60;
+  width = 175;
+  height = 50;
 
   STAUSBAR_HEALTH = [
     "./img/7_statusbars/1_statusbar/2_statusbar_health/green/0.png",
@@ -44,14 +44,11 @@ class StatusBar extends DrawableObject {
     super();
     this.world = world;
     this.character = this.world.character;
-    this.x = -60;
-    this.y = 5;
-    this.loadImages(this.STAUSBAR_HEALTH);
+    this.x = -60 + this.character.x;
     this.loadImages(this.STAUSBAR_COIN);
     this.loadImages(this.STAUSBAR_BOTTLE);
     this.loadImages(this.BOSSBAR_HEALTH);
 
-    this.drawStatusBar("healthbar");
     // this.drawStatusBar("bottlebar", -60, 40);
     // this.drawStatusBar("coinbar", -60, 95);
   }

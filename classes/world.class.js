@@ -7,7 +7,9 @@ class World {
   canvas;
   keyboard;
   camera_x = 0;
-  statusBar = new StatusBar(this);
+  healthBarPepe = new HealthBarPepe(this);
+  bottleBarPepe = new BottleBarPepe(this);
+  coinBarPepe = new CoinBarPepe(this);
 
   constructor(canvas, keyboard) {
     this.ctx = canvas.getContext("2d");
@@ -27,8 +29,9 @@ class World {
 
 
     this.addToMap(this.character);
-    debugger;
-    this.addToMap(this.statusBar);
+    this.addToMap(this.healthBarPepe);
+    this.addToMap(this.bottleBarPepe);
+    this.addToMap(this.coinBarPepe);
     this.ctx.translate(-this.camera_x, 0);
 
     let self = this;
@@ -37,6 +40,7 @@ class World {
       self.draw();
     });
   }
+  
 
   addToMap(mo) {
     if (mo.otherDirection) {
@@ -77,6 +81,7 @@ class World {
       this.level.enemies.forEach((enemy) => {
         if (this.character.isColliding(enemy)) {
           this.character.isHit(20);
+          this.healthBarPepe.drawStatusBar("healthbar");
           console.log("hit :" + this.character.health);
         }
       });

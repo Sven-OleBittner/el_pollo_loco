@@ -7,7 +7,7 @@ class Character extends MovableObject {
   keyboard;
   speed = 3;
   coins = 0;
-  bottles = 0
+  bottles = 0;
 
   IMAGES_IDLE = [
     "./img/2_character_pepe/1_idle/idle/I-1.png",
@@ -85,7 +85,7 @@ class Character extends MovableObject {
     this.loadImages(this.IMAGES_DEAD);
     this.animate();
     this.applyGravity();
-    
+
     //this.idleAnimation();
     //this.idleLongAnimation();
     //this.jumpingAnimation();
@@ -107,6 +107,9 @@ class Character extends MovableObject {
         this.otherDirection = true;
       }
       this.world.camera_x = -this.x + 100;
+      this.world.healthBarPepe.x = this.x - 80;
+      this.world.bottleBarPepe.x = this.x - 80;
+      this.world.coinBarPepe.x = this.x - 80;
     }, 1000 / 60);
 
     setInterval(() => {
