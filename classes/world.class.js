@@ -1,8 +1,8 @@
 class World {
   character = new Character();
   level = level1;
-  bottle = new Bottle();
   coin = new Coin();
+  bottle = new Bottle(this);
   ctx;
   canvas;
   keyboard;
@@ -10,6 +10,13 @@ class World {
   healthBarPepe = new HealthBarPepe(this);
   bottleBarPepe = new BottleBarPepe(this);
   coinBarPepe = new CoinBarPepe(this);
+  throwableObjects = [
+    new Bottle(this),
+    new Bottle(this),
+    new Bottle(this),
+    new Bottle(this),
+    new Bottle(this),
+  ];
 
   constructor(canvas, keyboard) {
     this.ctx = canvas.getContext("2d");

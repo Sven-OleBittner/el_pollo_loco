@@ -7,7 +7,7 @@ class Character extends MovableObject {
   keyboard;
   speed = 3;
   coins = 0;
-  bottles = 0;
+  bottles = 100;
 
   IMAGES_IDLE = [
     "./img/2_character_pepe/1_idle/idle/I-1.png",
@@ -106,10 +106,10 @@ class Character extends MovableObject {
         this.moveLeft();
         this.otherDirection = true;
       }
+      if (this.world.keyboard.D_KEY && this.world.character.bottles >= 0) {
+        this.world.throwableObjects[0].throwBottle();
+      }
       this.world.camera_x = -this.x + 100;
-      // this.world.healthBarPepe.x = this.x - 80;
-      // this.world.bottleBarPepe.x = this.x - 80;
-      // this.world.coinBarPepe.x = this.x - 80;
     }, 1000 / 60);
 
     setInterval(() => {
@@ -127,19 +127,4 @@ class Character extends MovableObject {
     }, 1000 / 10);
   }
 
-  idleAnimation() {
-    this.playAnimation(this.IMAGES_IDLE);
-  }
-
-  idleLongAnimation() {
-    this.playAnimation(this.IMAGES_IDLE_LONG);
-  }
-
-  hurtAnimation() {
-    this.playAnimation(this.IMAGES_HURT);
-  }
-
-  deadAnimation() {
-    this.playAnimation(this.IMAGES_DEAD);
-  }
 }

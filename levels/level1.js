@@ -1,4 +1,5 @@
 const level1 = new Level(
+
   [
     new LittleChicken(),
     new LittleChicken(),

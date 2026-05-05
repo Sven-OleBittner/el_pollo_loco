@@ -43,8 +43,6 @@ class MovableObject extends DrawableObject {
     this.speedY = 30;
   }
 
-  
-
   isColliding(mo) {
     return (
       this.x + this.width > mo.x &&
@@ -71,5 +69,11 @@ class MovableObject extends DrawableObject {
 
   isDead() {
     return this.health <= 0;
+  }
+
+  isThrowing() {
+    let timepassed = new Date().getTime() - this.lastHit;
+    timepassed = timepassed / 1000;
+    return timepassed < 0.5;
   }
 }
