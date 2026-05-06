@@ -32,7 +32,7 @@ class DrawableObject {
       this instanceof LittleChicken ||
       this instanceof BigChicken ||
       this instanceof Endboss ||
-      this instanceof Bottle
+      this instanceof ThrowableObject
     ) {
       ctx.beginPath();
       ctx.lineWidth = "1";

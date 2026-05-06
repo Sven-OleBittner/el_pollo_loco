@@ -2,7 +2,6 @@ class World {
   character = new Character();
   level = level1;
   coin = new Coin();
-  bottle = new Bottle(this);
   ctx;
   canvas;
   keyboard;
@@ -10,13 +9,7 @@ class World {
   healthBarPepe = new HealthBarPepe(this);
   bottleBarPepe = new BottleBarPepe(this);
   coinBarPepe = new CoinBarPepe(this);
-  throwableObjects = [
-    new Bottle(this),
-    new Bottle(this),
-    new Bottle(this),
-    new Bottle(this),
-    new Bottle(this),
-  ];
+  throwableObjects = [];
 
   constructor(canvas, keyboard) {
     this.ctx = canvas.getContext("2d");
@@ -24,7 +17,7 @@ class World {
     this.keyboard = keyboard;
     this.draw();
     this.setWorld();
-    this.checkCollisions();
+    this.run();
   }
 
   draw() {
@@ -33,6 +26,7 @@ class World {
     this.addObjectsToMap(this.level.backgroundObjects);
     this.addObjectsToMap(this.level.clouds);
     this.addObjectsToMap(this.level.enemies);
+    this.addObjectsToMap(this.throwableObjects);
 
     this.ctx.translate(-this.camera_x, 0);
     // space for static objects like statusbars
@@ -42,6 +36,7 @@ class World {
     this.ctx.translate(this.camera_x, 0);
 
     this.addToMap(this.character);
+
     this.ctx.translate(-this.camera_x, 0);
 
     let self = this;
@@ -86,15 +81,28 @@ class World {
   }
 
   checkCollisions() {
-    const hurtAnimationInterval = setInterval(() => {
-      this.level.enemies.forEach((enemy) => {
-        if (this.character.isColliding(enemy)) {
-          this.character.isHit(20);
-          this.healthBarPepe.drawStatusBar("healthbar");
-          console.log("hit :" + this.character.health);
-        }
-      });
+    this.level.enemies.forEach((enemy) => {
+      if (this.character.isColliding(enemy)) {
+        this.character.isHit(20);
+        this.healthBarPepe.drawStatusBar("healthbar");
+        console.log("hit :" + this.character.health);
+      }
+    });
+  }
+
+  run() {
+    setInterval(() => {
+      this.checkCollisions();
+      this.checkCollisionsBottle();
     }, 200);
+  }
+
+  checkCollisionsBottle() {
+    if (this.keyboard.D_KEY) {
+      let bottle = new ThrowableObject(this.character.x, this.character.y);
+      this.throwableObjects.push(bottle);
+    }
+     
   }
 
   isDead(mo) {

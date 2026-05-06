@@ -106,9 +106,6 @@ class Character extends MovableObject {
         this.moveLeft();
         this.otherDirection = true;
       }
-      if (this.world.keyboard.D_KEY && this.world.character.bottles >= 0) {
-        this.world.throwableObjects[0].throwBottle();
-      }
       this.world.camera_x = -this.x + 100;
     }, 1000 / 60);
 
