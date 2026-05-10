@@ -18,18 +18,40 @@ class ThrowableObject extends MovableObject {
     "img/6_salsa_bottle/bottle_rotation/bottle_splash/6_bottle_splash.png",
   ];
 
-  constructor(x, y) {
-    super().loadImage("./img/6_salsa_bottle/salsa_bottle.png");
+  constructor(world, x, y) {
+    super();
+    this.world = world;
     this.x = x + 40;
     this.y = y + 140;
-    this.throwBottle(this.x, this.y);
+    this.checkBottleCount(this.x, this.y);
   }
 
-  throwBottle() {
+  throwBottle(x, y) {
+    this.loadImage("./img/6_salsa_bottle/salsa_bottle.png");
     this.speedY = 30;
     this.applyGravity();
     setInterval(() => {
       this.x += 15;
     }, 1000 / 25);
+  }
+
+  checkBottleCount(x, y) {
+    if (this.world.character.bottles >= 1) {
+      this.throwBottle(x, y);
+      this.throwBottleAnimation();
+      this.world.character.bottles -= 1;
+      this.world.bottleBarPepe.drawStatusBar("bottlebar");
+      console.log("bottle count: " + this.world.character.bottles);
+    } else {
+      console.log("No more bottles left!");
+      return;
+    }
+  }
+
+  throwBottleAnimation() {
+    setInterval(() => {
+      this.loadImages(this.IMAGES_ROTATION);
+      this.playAnimation(this.IMAGES_ROTATION);
+    }, 100);
   }
 }

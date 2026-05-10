@@ -26,7 +26,9 @@ class World {
     this.addObjectsToMap(this.level.backgroundObjects);
     this.addObjectsToMap(this.level.clouds);
     this.addObjectsToMap(this.level.enemies);
-    this.addObjectsToMap(this.throwableObjects);
+    if (this.character.bottles > 0) {
+      this.addObjectsToMap(this.throwableObjects);
+    }
 
     this.ctx.translate(-this.camera_x, 0);
     // space for static objects like statusbars
@@ -99,7 +101,7 @@ class World {
 
   checkCollisionsBottle() {
     if (this.keyboard.D_KEY) {
-      let bottle = new ThrowableObject(this.character.x, this.character.y);
+      let bottle = new ThrowableObject(this, this.character.x, this.character.y);
       this.throwableObjects.push(bottle);
     }
      

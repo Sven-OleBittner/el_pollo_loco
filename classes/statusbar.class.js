@@ -58,7 +58,7 @@ class StatusBar extends DrawableObject {
       case "healthbar":
         return this.STAUSBAR_HEALTH[this.character.health / 20];
       case "bottlebar":
-        return this.STAUSBAR_BOTTLE[this.character.bottles / 20];
+        return this.STAUSBAR_BOTTLE[this.character.bottles];
       case "coinbar":
         return this.STAUSBAR_COIN[this.character.coins / 20];
     }
