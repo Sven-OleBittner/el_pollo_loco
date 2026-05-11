@@ -10,6 +10,15 @@ class World {
   bottleBarPepe = new BottleBarPepe(this);
   coinBarPepe = new CoinBarPepe(this);
   throwableObjects = [];
+  collectibleObjects = [
+    new BottleObject(),
+    new BottleObject(),
+    new BottleObject(),
+    new BottleObject(),
+    new Coin(),
+    new Coin(),
+    new Coin(),
+  ];
 
   constructor(canvas, keyboard) {
     this.ctx = canvas.getContext("2d");
@@ -26,6 +35,7 @@ class World {
     this.addObjectsToMap(this.level.backgroundObjects);
     this.addObjectsToMap(this.level.clouds);
     this.addObjectsToMap(this.level.enemies);
+    this.addObjectsToMap(this.collectibleObjects);
     if (this.character.bottles > 0) {
       this.addObjectsToMap(this.throwableObjects);
     }
@@ -101,13 +111,51 @@ class World {
 
   checkCollisionsBottle() {
     if (this.keyboard.D_KEY) {
-      let bottle = new ThrowableObject(this, this.character.x, this.character.y);
+      let bottle = new ThrowableObject(
+        this,
+        this.character.x,
+        this.character.y,
+      );
       this.throwableObjects.push(bottle);
     }
-     
   }
 
   isDead(mo) {
     return mo.health == 0;
+  }
+
+  collectObjects() {
+    if (this.isColliding(this.character, this.collectibleObjects)) {
+      this.collected = true;
+      this.character.coins += 1;
+      this.coinBarPepe.drawStatusBar("coinbar");
+      this.character.bottles += 1;
+      this.bottleBarPepe.drawStatusBar("bottlebar");
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  collectBottle() {
+    if (this.isColliding(this.character, this.collectibleObjects)) {
+      this.collected = true;
+      this.character.bottles += 1;
+      this.bottleBarPepe.drawStatusBar("bottlebar");
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  collectCoin() {
+    if (this.isColliding(this.character, this.collectibleObjects)) {
+      this.collected = true;
+      this.character.coins += 1;
+      this.coinBarPepe.drawStatusBar("coinbar");
+      return true;
+    } else {
+      return false;
+    }
   }
 }

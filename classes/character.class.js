@@ -7,7 +7,7 @@ class Character extends MovableObject {
   keyboard;
   speed = 3;
   coins = 0;
-  bottles = 5;
+  bottles = 0;
   offset = {
     top: 120,
     left: 40,

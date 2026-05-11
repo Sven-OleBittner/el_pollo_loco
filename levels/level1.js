@@ -1,6 +1,4 @@
 const level1 = new Level(
-  
-
   [
     new LittleChicken(),
     new LittleChicken(),
@@ -53,5 +51,13 @@ const level1 = new Level(
       719 * 3,
     ),
   ],
-  
+
+  [
+    new BottleObject(),
+    new BottleObject(),
+    new BottleObject(),
+    new BottleObject(),
+  ],
+
+  [new Coin(), new Coin(), new Coin(), new Coin(), new Coin(), new Coin()],
 );
