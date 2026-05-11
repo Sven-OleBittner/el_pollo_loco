@@ -4,6 +4,12 @@ class Endboss extends MovableObject {
   y = -50;
   world;
   speed = Math.random() * 2 + 3;
+  offset = {
+    top: 100,
+    left: 50,
+    right: 50,
+    bottom: 50,
+  }
 
   IMAGES_ALERT = [
     "./img/4_enemie_boss_chicken/2_alert/G5.png",
