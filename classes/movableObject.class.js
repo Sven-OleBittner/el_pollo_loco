@@ -81,9 +81,4 @@ class MovableObject extends DrawableObject {
     return this.health <= 0;
   }
 
-  isThrowing() {
-    let timepassed = new Date().getTime() - this.lastHit;
-    timepassed = timepassed / 1000;
-    return timepassed < 25;
-  }
 }

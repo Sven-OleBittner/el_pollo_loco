@@ -1,9 +1,9 @@
 class Coin extends CollectibleObject {
     offset = {
-        top: 10,
-        left: 5,
-        right: 5,
-        bottom: 5,
+        top: 50,
+        left: 50,
+        right: 50,
+        bottom: 50,
     };
 
     constructor() {

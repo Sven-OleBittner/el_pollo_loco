@@ -36,12 +36,11 @@ class ThrowableObject extends MovableObject {
   }
 
   checkBottleCount(x, y) {
-    if (this.world.character.bottles >= 1) {
+    if (this.world.character.bottles > 0) {
       this.throwBottle(x, y);
       this.throwBottleAnimation();
       this.world.character.bottles -= 1;
       this.world.bottleBarPepe.drawStatusBar("bottlebar");
-      console.log("bottle count: " + this.world.character.bottles);
     } else {
       console.log("No more bottles left!");
       return;
@@ -54,4 +53,11 @@ class ThrowableObject extends MovableObject {
       this.playAnimation(this.IMAGES_ROTATION);
     }, 100);
   }
+
+    isThrowing() {
+    let timepassed = new Date().getTime() - this.lastHit;
+    timepassed = timepassed / 1000;
+    return timepassed < 25;
+  }
+
 }

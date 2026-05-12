@@ -9,16 +9,9 @@ class World {
   healthBarPepe = new HealthBarPepe(this);
   bottleBarPepe = new BottleBarPepe(this);
   coinBarPepe = new CoinBarPepe(this);
+  collectibleObject = new CollectibleObject(this);
   throwableObjects = [];
-  collectibleObjects = [
-    new BottleObject(),
-    new BottleObject(),
-    new BottleObject(),
-    new BottleObject(),
-    new Coin(),
-    new Coin(),
-    new Coin(),
-  ];
+  collectObjects = [];
 
   constructor(canvas, keyboard) {
     this.ctx = canvas.getContext("2d");
@@ -35,7 +28,9 @@ class World {
     this.addObjectsToMap(this.level.backgroundObjects);
     this.addObjectsToMap(this.level.clouds);
     this.addObjectsToMap(this.level.enemies);
-    this.addObjectsToMap(this.collectibleObjects);
+
+    this.addObjectsToMap(this.level.bottles);
+    this.addObjectsToMap(this.level.coins);
     if (this.character.bottles > 0) {
       this.addObjectsToMap(this.throwableObjects);
     }
@@ -102,9 +97,30 @@ class World {
     });
   }
 
+  checkCollisionsCollectibleObjects() {
+    this.level.bottles.forEach((bottle) => {
+      if (this.character.isColliding(bottle)) {
+        bottle.collectObject();
+        this.character.bottles ++;
+        this.bottleBarPepe.drawStatusBar("bottlebar");
+        console.log("bottle collected: " + this.character.bottles);
+      }
+    });
+
+    this.level.coins.forEach((coin) => {
+      if (this.character.isColliding(coin)) {
+        coin.collectObject();
+        this.character.coins ++;
+        this.coinBarPepe.drawStatusBar("coinbar");
+        console.log("coin collected: " + this.character.coins);
+      }
+    });
+  }
+
   run() {
     setInterval(() => {
       this.checkCollisions();
+      this.checkCollisionsCollectibleObjects();
       this.checkCollisionsBottle();
     }, 200);
   }
@@ -122,40 +138,5 @@ class World {
 
   isDead(mo) {
     return mo.health == 0;
-  }
-
-  collectObjects() {
-    if (this.isColliding(this.character, this.collectibleObjects)) {
-      this.collected = true;
-      this.character.coins += 1;
-      this.coinBarPepe.drawStatusBar("coinbar");
-      this.character.bottles += 1;
-      this.bottleBarPepe.drawStatusBar("bottlebar");
-      return true;
-    } else {
-      return false;
-    }
-  }
-
-  collectBottle() {
-    if (this.isColliding(this.character, this.collectibleObjects)) {
-      this.collected = true;
-      this.character.bottles += 1;
-      this.bottleBarPepe.drawStatusBar("bottlebar");
-      return true;
-    } else {
-      return false;
-    }
-  }
-
-  collectCoin() {
-    if (this.isColliding(this.character, this.collectibleObjects)) {
-      this.collected = true;
-      this.character.coins += 1;
-      this.coinBarPepe.drawStatusBar("coinbar");
-      return true;
-    } else {
-      return false;
-    }
   }
 }

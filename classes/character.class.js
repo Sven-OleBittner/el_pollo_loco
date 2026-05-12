@@ -13,7 +13,8 @@ class Character extends MovableObject {
     left: 40,
     right: 30,
     bottom: 30,
-  }
+  };
+
 
   IMAGES_IDLE = [
     "./img/2_character_pepe/1_idle/idle/I-1.png",
@@ -120,8 +121,13 @@ class Character extends MovableObject {
         this.playAnimation(this.IMAGES_WALKING);
       } else {
         this.playAnimation(this.IMAGES_IDLE);
-      }
-    }, 1000 / 10);
+        setTimeout(() => {
+          if (!this.world.keyboard.RIGHT && !this.world.keyboard.LEFT && !this.isAboveGround()) {
+            this.playAnimation(this.IMAGES_IDLE_LONG);
+          }}, 3000);
+      } 
+    }, 1000 / 8);
   }
+
 
 }

@@ -53,11 +53,9 @@ const level1 = new Level(
   ],
 
   [
-    new BottleObject(),
-    new BottleObject(),
-    new BottleObject(),
-    new BottleObject(),
+    new BottleObject("img/6_salsa_bottle/1_salsa_bottle_on_ground.png"),
+    new BottleObject("img/6_salsa_bottle/2_salsa_bottle_on_ground.png"),
   ],
 
-  [new Coin(), new Coin(), new Coin(), new Coin(), new Coin(), new Coin()],
+  [new Coin("img/8_coin/coin_1.png")],
 );

@@ -60,7 +60,7 @@ class StatusBar extends DrawableObject {
       case "bottlebar":
         return this.STAUSBAR_BOTTLE[this.character.bottles];
       case "coinbar":
-        return this.STAUSBAR_COIN[this.character.coins / 20];
+        return this.STAUSBAR_COIN[this.character.coins];
     }
   }
 }

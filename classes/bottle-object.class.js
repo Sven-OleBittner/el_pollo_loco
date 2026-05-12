@@ -1,25 +1,17 @@
 class BottleObject extends CollectibleObject {
   offset = {
-    top: 10,
-    left: 5,
-    right: 5,
-    bottom: 5,
+    top: 30,
+    left: 30,
+    right: 30,
+    bottom: 30,
   };
 
-  BOTTLE_IMAGES = [
-    "./img/6_salsa_bottle/1_salsa_bottle_on_ground.png",
-    "./img/6_salsa_bottle/2_salsa_bottle_on_ground.png",
-  ];
-
-  constructor() {
-    super().loadImage(this.BOTTLE_IMAGES[0]);
-    this.loadImage(this.BOTTLE_IMAGES[1]);
-    this.loadImages(this.BOTTLE_IMAGES);
-    this.x = 500 + Math.random() * 2000;
-    this.y = 360;
+  constructor(imagePath) {
+    super().loadImage(imagePath);
+    this.x = 500 + Math.random() * 1400; // Random x position between 500 and 1900
+    this.y = 365;
     this.width = 50;
     this.height = 60;
   }
-
 
 }

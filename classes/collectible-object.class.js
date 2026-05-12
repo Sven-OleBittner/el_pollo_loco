@@ -4,11 +4,14 @@ class CollectibleObject extends DrawableObject {
     left: 0,
     right: 0,
     bottom: 0,
-  }
+  };
 
-  constructor() {
+  constructor(world) {
     super();
+    this.world = world;
   }
 
-  
+  collectObject() {
+    this.x = -100; // Move the object off-screen after collection
+  }
 }
