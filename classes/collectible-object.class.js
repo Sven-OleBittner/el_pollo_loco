@@ -12,6 +12,6 @@ class CollectibleObject extends DrawableObject {
   }
 
   collectObject() {
-    this.x = -100; // Move the object off-screen after collection
+    this.y = 5000; // Move the object off-screen after collection
   }
 }

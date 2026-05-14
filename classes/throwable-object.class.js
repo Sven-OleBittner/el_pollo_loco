@@ -23,28 +23,17 @@ class ThrowableObject extends MovableObject {
     this.world = world;
     this.x = x + 40;
     this.y = y + 140;
-    this.checkBottleCount(this.x, this.y);
+    this.throwBottle(this.x, this.y);
   }
 
   throwBottle(x, y) {
     this.loadImage("./img/6_salsa_bottle/salsa_bottle.png");
+    this.throwBottleAnimation();
     this.speedY = 30;
     this.applyGravity();
     setInterval(() => {
-      this.x += 15;
+      this.x += 20;
     }, 1000 / 25);
-  }
-
-  checkBottleCount(x, y) {
-    if (this.world.character.bottles > 0) {
-      this.throwBottle(x, y);
-      this.throwBottleAnimation();
-      this.world.character.bottles -= 1;
-      this.world.bottleBarPepe.drawStatusBar("bottlebar");
-    } else {
-      console.log("No more bottles left!");
-      return;
-    }
   }
 
   throwBottleAnimation() {
@@ -53,11 +42,4 @@ class ThrowableObject extends MovableObject {
       this.playAnimation(this.IMAGES_ROTATION);
     }, 100);
   }
-
-    isThrowing() {
-    let timepassed = new Date().getTime() - this.lastHit;
-    timepassed = timepassed / 1000;
-    return timepassed < 25;
-  }
-
 }

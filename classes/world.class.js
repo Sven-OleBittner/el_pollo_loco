@@ -31,9 +31,7 @@ class World {
 
     this.addObjectsToMap(this.level.bottles);
     this.addObjectsToMap(this.level.coins);
-    if (this.character.bottles > 0) {
-      this.addObjectsToMap(this.throwableObjects);
-    }
+    this.addObjectsToMap(this.throwableObjects);
 
     this.ctx.translate(-this.camera_x, 0);
     // space for static objects like statusbars
@@ -101,18 +99,15 @@ class World {
     this.level.bottles.forEach((bottle) => {
       if (this.character.isColliding(bottle)) {
         bottle.collectObject();
-        this.character.bottles ++;
+        this.character.bottles += 1;
         this.bottleBarPepe.drawStatusBar("bottlebar");
-        console.log("bottle collected: " + this.character.bottles);
       }
     });
-
     this.level.coins.forEach((coin) => {
       if (this.character.isColliding(coin)) {
         coin.collectObject();
-        this.character.coins ++;
+        this.character.coins += 1;
         this.coinBarPepe.drawStatusBar("coinbar");
-        console.log("coin collected: " + this.character.coins);
       }
     });
   }
@@ -126,13 +121,15 @@ class World {
   }
 
   checkCollisionsBottle() {
-    if (this.keyboard.D_KEY) {
+    if (this.keyboard.D_KEY && this.character.bottles > 0) {
       let bottle = new ThrowableObject(
         this,
         this.character.x,
         this.character.y,
       );
       this.throwableObjects.push(bottle);
+      this.character.bottles -= 1;
+      this.bottleBarPepe.drawStatusBar("bottlebar");
     }
   }
 
