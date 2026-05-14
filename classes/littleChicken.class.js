@@ -7,7 +7,7 @@ class LittleChicken extends MovableObject {
     left: 5,
     right: 5,
     bottom: 10,
-  }
+  };
 
   IMAGES_WALKING = [
     "./img/3_enemies_chicken/chicken_small/1_walk/1_w.png",
@@ -32,4 +32,5 @@ class LittleChicken extends MovableObject {
       this.playAnimation(this.IMAGES_WALKING);
     }, 200);
   }
+
 }

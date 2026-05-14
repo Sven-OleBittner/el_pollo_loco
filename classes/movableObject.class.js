@@ -33,10 +33,13 @@ class MovableObject extends DrawableObject {
     if (this instanceof ThrowableObject) {
       return true;
     } else {
-    return this.y < 180;
+      return this.y < 180;
     }
   }
 
+  isAboveEnemy(mo) {
+    return this.y + this.height - this.offset.bottom > mo.y + mo.offset.top;
+  }
   isOnGround() {
     return this.y === 180;
   }
@@ -81,4 +84,11 @@ class MovableObject extends DrawableObject {
     return this.health <= 0;
   }
 
+  enemyDead(path) {
+    this.loadImage(path);
+    this.speed = 0;
+    setTimeout(() => {
+      this.y = 1000;
+    }, 500);
+  }
 }

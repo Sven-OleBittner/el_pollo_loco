@@ -85,16 +85,19 @@ class World {
     this.character.world = this;
   }
 
-  checkCollisions() {
+checkCollisions() {
     this.level.enemies.forEach((enemy) => {
       if (this.character.isColliding(enemy)) {
-        this.character.isHit(20);
-        this.healthBarPepe.drawStatusBar("healthbar");
-        console.log("hit :" + this.character.health);
+        if (this.character.isAboveEnemy(enemy)) {
+          enemy.enemyDead("./img/3_enemies_chicken/chicken_small/2_dead/dead.png"); // LittleChicken besiegen
+          this.character.jump(); // kleiner Bounce nach oben
+        } else {
+          this.character.isHit(20);
+          this.healthBarPepe.drawStatusBar("healthbar");
+        }
       }
     });
   }
-
   checkCollisionsCollectibleObjects() {
     this.level.bottles.forEach((bottle) => {
       if (this.character.isColliding(bottle)) {
