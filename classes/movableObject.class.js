@@ -38,8 +38,9 @@ class MovableObject extends DrawableObject {
   }
 
   isAboveEnemy(mo) {
-    return this.y + this.height - this.offset.bottom > mo.y + mo.offset.top;
+    return this.y + this.height < mo.y + mo.offset.top;
   }
+
   isOnGround() {
     return this.y === 180;
   }

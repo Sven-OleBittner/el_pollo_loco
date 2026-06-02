@@ -85,15 +85,19 @@ class World {
     this.character.world = this;
   }
 
-checkCollisions() {
+  checkCollisions() {
     this.level.enemies.forEach((enemy) => {
       if (this.character.isColliding(enemy)) {
         if (this.character.isAboveEnemy(enemy)) {
-          enemy.enemyDead("./img/3_enemies_chicken/chicken_small/2_dead/dead.png"); // LittleChicken besiegen
-          this.character.jump(); // kleiner Bounce nach oben
+          debugger;
+          enemy.enemyDead(
+            "./img/3_enemies_chicken/chicken_small/2_dead/dead.png",
+          ); // LittleChicken besiegen
         } else {
           this.character.isHit(20);
           this.healthBarPepe.drawStatusBar("healthbar");
+          console.log(this.character.y + this.character.height);
+          
         }
       }
     });
